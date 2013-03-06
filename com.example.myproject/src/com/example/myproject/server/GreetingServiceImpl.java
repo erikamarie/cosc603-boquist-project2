@@ -46,7 +46,9 @@ public class GreetingServiceImpl extends RemoteServiceServlet implements
 	}
 	
 	private String stutter(String input){
+		String[] lines = input.split("\n");
 		String wordString = input;
+		
         return wordString;
 	}
 }

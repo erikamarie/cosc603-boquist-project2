@@ -14,6 +14,7 @@ import com.google.gwt.user.client.ui.DialogBox;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.RootPanel;
+import com.google.gwt.user.client.ui.TextArea;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
@@ -40,7 +41,11 @@ public class Com_example_myproject implements EntryPoint {
 	 */
 	public void onModuleLoad() {
 		final Button sendButton = new Button("Send");
-		final TextBox nameField = new TextBox();
+		//final TextBox nameField = new TextBox();
+		final TextArea nameField = new TextArea();
+		nameField.setCharacterWidth(100);
+		nameField.setVisibleLines(15);
+		
 		nameField.setText("Enter text here...");
 		final Label errorLabel = new Label();
 
