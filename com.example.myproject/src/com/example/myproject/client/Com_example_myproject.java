@@ -104,7 +104,7 @@ public class Com_example_myproject implements EntryPoint {
 			 */
 			public void onKeyUp(KeyUpEvent event) {
 				if (event.getNativeKeyCode() == KeyCodes.KEY_ENTER) {
-					sendNameToServer();
+					//sendNameToServer();
 				}
 			}
 
