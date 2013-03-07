@@ -116,7 +116,7 @@ public class Com_example_myproject implements EntryPoint {
 				errorLabel.setText("");
 				String textToServer = nameField.getText();
 				if (!FieldVerifier.isValidName(textToServer)) {
-					errorLabel.setText("Please enter at least four characters");
+					errorLabel.setText("Please enter at least ten characters");
 					return;
 				}
 
