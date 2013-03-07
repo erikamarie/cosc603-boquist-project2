@@ -1,5 +1,9 @@
 package com.example.myproject.server;
 
+import java.util.LinkedHashMap;
+import java.util.Map;
+import java.util.Set;
+
 import com.example.myproject.client.GreetingService;
 import com.example.myproject.shared.FieldVerifier;
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
@@ -44,11 +48,53 @@ public class GreetingServiceImpl extends RemoteServiceServlet implements
 		return html.replaceAll("&", "&amp;").replaceAll("<", "&lt;")
 				.replaceAll(">", "&gt;");
 	}
-	
+	/**
+	 * Checks a string for repeated words
+	 * 
+	 * @param input the string to check
+	 * @return the stuttered words
+	 */
 	private String stutter(String input){
 		String[] lines = input.split("\n");
-		String wordString = input;
+		String lineString = "";
+		String[] formattedLineString;
+		Map<String, Integer> wordMap;
+		String wordString = "";
+		String stutterResults = "";
+		int lineNumber;
 		
-        return wordString;
+		//traverses the lines to check for stutters
+		for(int i = 0; i<lines.length; i +=1){
+			lineNumber = i + 1;
+			lineString = lines[i];
+			//format the lines so we can do something with it
+            formattedLineString = lineString.replaceAll("[\\n]", " ").replaceAll("[!.,?!:;/()]","").split(" ");
+            //create the new map for storing the words
+            wordMap = new LinkedHashMap<String,Integer>();
+            for(int j =0; j< formattedLineString.length; j+=1){
+                String tempString = formattedLineString[j];
+                //check if map has the word, if it doesn't, add it, or increase the count
+                if(wordMap.get(tempString) == null){
+                	wordMap.put(tempString, 1);
+                }else{
+                	wordMap.put(tempString, wordMap.get(tempString) +1);
+                }
+            }
+            Set<String> words = wordMap.keySet();
+            for(String word:words){
+            	//print if the word is repeated
+            	if(wordMap.get(word) > 1){
+            		wordString = word;
+            		for(int k = 0; k<wordMap.get(word)-1; k +=1){
+            			wordString += " " + word;
+            		}
+            		stutterResults += "Repeated word on line " + lineNumber + " : " + wordString + "<br>";
+            	}
+            }
+		}
+		if(stutterResults == ""){
+			stutterResults = "There are no stuttered words!";
+		}
+		return stutterResults;
 	}
 }
